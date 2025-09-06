@@ -88,20 +88,7 @@ export const AuthPage: React.FC = () => {
   };
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-gold-50 via-white to-olive-50 relative">
-      {/* Islamic Pattern Background */}
-      <div className="absolute inset-0 opacity-10">
-        <IslamicIcon type="pattern" className="w-full h-full text-gold-500" />
-      </div>
-
-      {/* Decorative Elements */}
-      <div className="absolute top-20 left-20 opacity-20">
-        <IslamicIcon type="crescent" size="lg" className="text-gold-400" />
-      </div>
-      <div className="absolute bottom-20 right-20 opacity-20">
-        <IslamicIcon type="star" size="lg" className="text-olive-400" />
-      </div>
-
+    <div className="min-h-screen auth-bg relative">
       <div className="relative flex items-center justify-center min-h-screen px-4 sm:px-6 lg:px-8">
         <div className="max-w-md w-full">
           {/* Header */}

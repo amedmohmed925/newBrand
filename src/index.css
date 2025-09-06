@@ -17,3 +17,30 @@
   display: inline-block;
   white-space: nowrap;
 }
+
+/* Islamic Background for Authentication Pages */
+.auth-bg {
+  background-image: url('https://www.facebook.com/80f29c4d-7942-4a15-8afc-e7aadb2440d9');
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  background-attachment: fixed;
+  position: relative;
+}
+
+.auth-bg::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: rgba(255, 255, 255, 0.85);
+  backdrop-filter: blur(2px);
+  z-index: 1;
+}
+
+.auth-bg > * {
+  position: relative;
+  z-index: 2;
+}
