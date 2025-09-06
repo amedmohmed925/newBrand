@@ -19,11 +19,18 @@ export const Header: React.FC = () => {
 
   return (
     <>
-      {/* Announcement Bar */}
-      <div className="bg-gold-500 text-white text-center py-2 text-sm">
-        <IslamicIcon type="star" size="sm" className="inline ml-2" />
-        شحن مجاني لجميع الطلبات فوق 800 جنيه
-        <IslamicIcon type="star" size="sm" className="inline mr-2" />
+      {/* Announcement Bar with Slow Infinite Scroll */}
+      <div className="bg-gold-500 text-white py-2 text-sm overflow-hidden">
+        <div className="scroll-text">
+          {/* تكرار النص عدة مرات للحركة المستمرة */}
+          {Array.from({ length: 20 }, (_, i) => (
+            <span key={i} className="inline-flex items-center px-8">
+              <IslamicIcon type="star" size="sm" className="inline ml-2" />
+              شحن مجاني لجميع الطلبات فوق 800 جنيه
+              <IslamicIcon type="star" size="sm" className="inline mr-2" />
+            </span>
+          ))}
+        </div>
       </div>
 
       <header className="bg-white shadow-sm border-b border-gray-100">
