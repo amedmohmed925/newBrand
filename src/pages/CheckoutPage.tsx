@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import { useCart } from '../hooks/useCart';
 import { useNavigate } from 'react-router-dom';
 import { IslamicIcon } from '../components/Icons/IslamicIcon';
+import { formatPrice } from '../utils/priceUtils';
 import { useForm } from 'react-hook-form';
 import { yupResolver } from '@hookform/resolvers/yup';
 import * as yup from 'yup';
@@ -45,9 +46,9 @@ export const CheckoutPage: React.FC = () => {
 
   const paymentMethod = watch('paymentMethod');
 
+  // Show loading if cart is empty
   if (items.length === 0) {
-    navigate('/cart');
-    return null;
+    return <div>Loading...</div>;
   }
 
   const onSubmit = async (data: CheckoutFormData) => {
@@ -72,6 +73,7 @@ export const CheckoutPage: React.FC = () => {
       });
       
     } catch (error) {
+      console.error('Checkout error:', error);
       toast.error('حدث خطأ في إرسال الطلب. يرجى المحاولة مرة أخرى.');
     } finally {
       setIsProcessing(false);
@@ -82,7 +84,7 @@ export const CheckoutPage: React.FC = () => {
     <div className="min-h-screen bg-gray-50">
       {/* Header with Islamic Pattern */}
       <div className="relative bg-gradient-to-l from-gold-50 to-white border-b border-gray-200">
-        <div className="absolute inset-0 opacity-5">
+        <div className="absolute inset-0 opacity-5 -z-10">
           <IslamicIcon type="pattern" className="w-full h-full text-gold-500" />
         </div>
         <div className="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
@@ -165,7 +167,7 @@ export const CheckoutPage: React.FC = () => {
                       {...register('city')}
                       type="text"
                       className="w-full p-3 border border-gray-300 rounded-lg font-cairo text-right focus:ring-2 focus:ring-gold-500 focus:border-gold-500"
-                      placeholder="الرياض"
+                      placeholder="القاهرة"
                     />
                     {errors.city && (
                       <p className="text-red-600 text-sm mt-1 font-cairo">{errors.city.message}</p>
@@ -315,7 +317,7 @@ export const CheckoutPage: React.FC = () => {
                           {item.size} • {item.color} • {item.quantity}×
                         </p>
                         <p className="text-sm font-bold text-gray-900 font-cairo">
-                          {item.product.price * item.quantity} ر.س
+                          {formatPrice(item.product.price * item.quantity)}
                         </p>
                       </div>
                     </div>
@@ -326,7 +328,7 @@ export const CheckoutPage: React.FC = () => {
                 <div className="border-t border-gray-200 pt-4 space-y-3">
                   <div className="flex justify-between">
                     <span className="text-gray-600 font-cairo">المجموع الفرعي</span>
-                    <span className="font-cairo">{total} ر.س</span>
+                    <span className="font-cairo">{formatPrice(total)}</span>
                   </div>
                   <div className="flex justify-between">
                     <span className="text-gray-600 font-cairo">الشحن</span>
@@ -334,7 +336,7 @@ export const CheckoutPage: React.FC = () => {
                   </div>
                   <div className="flex justify-between text-lg font-bold pt-2 border-t">
                     <span className="text-gray-900 font-cairo">المجموع الكلي</span>
-                    <span className="text-gray-900 font-cairo">{total} ر.س</span>
+                    <span className="text-gray-900 font-cairo">{formatPrice(total)}</span>
                   </div>
                 </div>
 

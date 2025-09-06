@@ -7,11 +7,11 @@ export const mockProducts: Product[] = [
     nameEn: 'Embroidered Ramadan Thobe',
     description: 'ثوب أنيق مطرز بخيوط ذهبية، مثالي للمناسبات الخاصة وشهر رمضان المبارك',
     descriptionEn: 'Elegant thobe embroidered with golden threads, perfect for special occasions and Ramadan',
-    price: 299,
-    originalPrice: 349,
+    price: 1250,
+    originalPrice: 1450,
     images: [
-      'https://images.pexels.com/photos/8839979/pexels-photo-8839979.jpeg?auto=compress&cs=tinysrgb&w=800',
-      'https://images.pexels.com/photos/8839977/pexels-photo-8839977.jpeg?auto=compress&cs=tinysrgb&w=800'
+      'https://pixelettastore.com/wp-content/uploads/2025/07/%D8%B9%D9%84%D9%89-1.png',
+      'https://pixelettastore.com/wp-content/uploads/2025/07/%D8%B9%D9%84%D9%89-%D9%87%D8%B0%D9%87-3.png'
     ],
     category: 'ثياب رجالي',
     sizes: ['S', 'M', 'L', 'XL', 'XXL'],
@@ -27,10 +27,10 @@ export const mockProducts: Product[] = [
     nameEn: 'Modern Abaya with Geometric Embroidery',
     description: 'عباية عصرية بتصميم هندسي مستوحى من الفن الإسلامي، مناسبة للارتداء اليومي',
     descriptionEn: 'Modern abaya with geometric design inspired by Islamic art, suitable for daily wear',
-    price: 199,
+    price: 850,
     images: [
-      'https://images.pexels.com/photos/8867482/pexels-photo-8867482.jpeg?auto=compress&cs=tinysrgb&w=800',
-      'https://images.pexels.com/photos/8867481/pexels-photo-8867481.jpeg?auto=compress&cs=tinysrgb&w=800'
+      'https://pixelettastore.com/wp-content/uploads/2025/07/%D8%AE%D8%B1%D9%8A%D8%B7%D8%A9-5.png',
+      'https://pixelettastore.com/wp-content/uploads/2025/07/WhatsApp-Image-2025-07-27-at-5.52.26-AM-1.jpeg'
     ],
     category: 'عبايات',
     sizes: ['XS', 'S', 'M', 'L', 'XL'],
@@ -46,9 +46,10 @@ export const mockProducts: Product[] = [
     nameEn: 'Long Sleeve Cotton Shirt',
     description: 'قميص قطني مريح بأكمام طويلة، مثالي للطقس المعتدل والارتداء الكاجوال',
     descriptionEn: 'Comfortable cotton shirt with long sleeves, perfect for moderate weather and casual wear',
-    price: 149,
+    price: 620,
     images: [
-      'https://images.pexels.com/photos/8112359/pexels-photo-8112359.jpeg?auto=compress&cs=tinysrgb&w=800'
+      'https://pixelettastore.com/wp-content/uploads/2025/07/%D8%BA%D8%B1%D8%A7%D9%852.png',
+      'https://pixelettastore.com/wp-content/uploads/2025/07/%D8%A8%D8%A7%D8%A8-%D8%A7%D9%84%D9%86%D8%AC%D8%A7%D8%B1-%D8%A7%D8%A8%D9%8A%D8%B6.png'
     ],
     category: 'قمصان',
     sizes: ['S', 'M', 'L', 'XL'],
@@ -62,9 +63,9 @@ export const mockProducts: Product[] = [
     nameEn: 'Long Pleated Skirt',
     description: 'تنورة طويلة أنيقة بطيات ناعمة، تجمع بين الأناقة والراحة',
     descriptionEn: 'Elegant long skirt with soft pleats, combining elegance and comfort',
-    price: 119,
+    price: 495,
     images: [
-      'https://images.pexels.com/photos/7679720/pexels-photo-7679720.jpeg?auto=compress&cs=tinysrgb&w=800'
+      'https://pixelettastore.com/wp-content/uploads/2025/07/WhatsApp-Image-2025-07-27-at-5.52.24-AM-1.jpeg'
     ],
     category: 'تنانير',
     sizes: ['XS', 'S', 'M', 'L'],
@@ -79,9 +80,9 @@ export const mockProducts: Product[] = [
     nameEn: 'Warm Wool Cardigan',
     description: 'كردجان صوفي دافئ ومريح، مثالي للطقس البارد مع لمسة عصرية',
     descriptionEn: 'Warm and comfortable wool cardigan, perfect for cold weather with a modern touch',
-    price: 179,
+    price: 750,
     images: [
-      'https://images.pexels.com/photos/7679662/pexels-photo-7679662.jpeg?auto=compress&cs=tinysrgb&w=800'
+      'https://pixelettastore.com/wp-content/uploads/2025/07/%D9%83%D8%A7%D9%81%D9%8A%D9%8A%D9%862.png'
     ],
     category: 'ملابس خارجية',
     sizes: ['S', 'M', 'L', 'XL'],
@@ -95,9 +96,9 @@ export const mockProducts: Product[] = [
     nameEn: 'Luxury Silk Hijab',
     description: 'حجاب حريري فاخر بملمس ناعم وألوان زاهية، يضفي أناقة على إطلالتك',
     descriptionEn: 'Luxury silk hijab with soft texture and vibrant colors, adds elegance to your look',
-    price: 89,
+    price: 370,
     images: [
-      'https://images.pexels.com/photos/8867526/pexels-photo-8867526.jpeg?auto=compress&cs=tinysrgb&w=800'
+      'https://pixelettastore.com/wp-content/uploads/2025/07/WhatsApp-Image-2025-07-27-at-5.52.31-AM-3.jpeg'
     ],
     category: 'حجاب واكسسوارات',
     sizes: ['واحد'],

@@ -22,7 +22,7 @@ export const Header: React.FC = () => {
       {/* Announcement Bar */}
       <div className="bg-gold-500 text-white text-center py-2 text-sm">
         <IslamicIcon type="star" size="sm" className="inline ml-2" />
-        شحن مجاني لجميع الطلبات فوق 200 ريال
+        شحن مجاني لجميع الطلبات فوق 800 جنيه
         <IslamicIcon type="star" size="sm" className="inline mr-2" />
       </div>
 

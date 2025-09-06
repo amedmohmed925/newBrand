@@ -1,19 +1,27 @@
 import React from 'react';
+import { Link } from 'react-router-dom';
 import { IslamicIcon } from '../../components/Icons/IslamicIcon';
+import { formatPrice } from '../../utils/priceUtils';
 import { 
   ShoppingBagIcon, 
   UserGroupIcon, 
   CurrencyDollarIcon, 
   ChartBarIcon,
-  TrendingUpIcon,
-  TrendingDownIcon
+  ArrowTrendingUpIcon,
+  ArrowTrendingDownIcon,
+  PlusIcon,
+  EyeIcon,
+  PencilIcon,
+  ClipboardDocumentListIcon,
+  GiftIcon,
+  BellIcon
 } from '@heroicons/react/24/outline';
 
 export const AdminDashboard: React.FC = () => {
   const stats = [
     {
       name: 'إجمالي المبيعات',
-      value: '45,600 ر.س',
+      value: formatPrice(189500),
       change: '+12.5%',
       changeType: 'increase',
       icon: CurrencyDollarIcon,
@@ -45,11 +53,43 @@ export const AdminDashboard: React.FC = () => {
     }
   ];
 
+  // إجراءات سريعة
+  const quickActions = [
+    {
+      name: 'إضافة منتج جديد',
+      description: 'أضف منتج جديد للمتجر',
+      icon: PlusIcon,
+      href: '/admin/products/add',
+      color: 'bg-green-500 hover:bg-green-600'
+    },
+    {
+      name: 'عرض الطلبات',
+      description: 'إدارة الطلبات الجديدة',
+      icon: ClipboardDocumentListIcon,
+      href: '/admin/orders',
+      color: 'bg-blue-500 hover:bg-blue-600'
+    },
+    {
+      name: 'إدارة العروض',
+      description: 'إنشاء عروض وخصومات',
+      icon: GiftIcon,
+      href: '/admin/promotions',
+      color: 'bg-purple-500 hover:bg-purple-600'
+    },
+    {
+      name: 'الإشعارات',
+      description: 'إرسال إشعارات للعملاء',
+      icon: BellIcon,
+      href: '/admin/notifications',
+      color: 'bg-orange-500 hover:bg-orange-600'
+    }
+  ];
+
   const recentOrders = [
-    { id: 'ORD-001', customer: 'سارة أحمد', total: '299 ر.س', status: 'جديد', time: 'منذ 5 دقائق' },
-    { id: 'ORD-002', customer: 'فاطمة محمد', total: '450 ر.س', status: 'قيد التحضير', time: 'منذ 15 دقيقة' },
-    { id: 'ORD-003', customer: 'عائشة علي', total: '199 ر.س', status: 'تم الشحن', time: 'منذ ساعة' },
-    { id: 'ORD-004', customer: 'زينب خالد', total: '325 ر.س', status: 'مكتمل', time: 'منذ ساعتين' }
+    { id: 'ORD-001', customer: 'سارة أحمد', total: formatPrice(1245), status: 'جديد', time: 'منذ 5 دقائق' },
+    { id: 'ORD-002', customer: 'فاطمة محمد', total: formatPrice(1875), status: 'قيد التحضير', time: 'منذ 15 دقيقة' },
+    { id: 'ORD-003', customer: 'عائشة علي', total: formatPrice(830), status: 'تم الشحن', time: 'منذ ساعة' },
+    { id: 'ORD-004', customer: 'زينب خالد', total: formatPrice(1350), status: 'مكتمل', time: 'منذ ساعتين' }
   ];
 
   const getStatusColor = (status: string) => {
@@ -106,9 +146,9 @@ export const AdminDashboard: React.FC = () => {
                 stat.changeType === 'increase' ? 'text-green-600' : 'text-red-600'
               }`}>
                 {stat.changeType === 'increase' ? (
-                  <TrendingUpIcon className="h-4 w-4" />
+                  <ArrowTrendingUpIcon className="h-4 w-4" />
                 ) : (
-                  <TrendingDownIcon className="h-4 w-4" />
+                  <ArrowTrendingDownIcon className="h-4 w-4" />
                 )}
                 {stat.change}
               </div>
@@ -119,6 +159,31 @@ export const AdminDashboard: React.FC = () => {
             </div>
           </div>
         ))}
+      </div>
+
+      {/* Quick Actions */}
+      <div className="bg-white rounded-xl shadow-sm border border-gray-200 p-6">
+        <h2 className="text-xl font-semibold text-gray-900 mb-6 flex items-center gap-2">
+          <IslamicIcon type="star" size="sm" className="text-gold-500" />
+          إجراءات سريعة
+        </h2>
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4">
+          {quickActions.map((action, index) => (
+            <Link
+              key={index}
+              to={action.href}
+              className="block group"
+            >
+              <div className="p-6 border border-gray-200 rounded-lg hover:border-gray-300 transition-colors group-hover:shadow-md">
+                <div className={`w-12 h-12 rounded-lg ${action.color} flex items-center justify-center mb-4 transition-colors`}>
+                  <action.icon className="h-6 w-6 text-white" />
+                </div>
+                <h3 className="font-semibold text-gray-900 mb-2 font-cairo">{action.name}</h3>
+                <p className="text-sm text-gray-600 font-cairo">{action.description}</p>
+              </div>
+            </Link>
+          ))}
+        </div>
       </div>
 
       {/* Content Grid */}
@@ -152,36 +217,6 @@ export const AdminDashboard: React.FC = () => {
             <div className="mt-4 text-center">
               <button className="text-gold-600 hover:text-gold-700 font-medium text-sm">
                 عرض جميع الطلبات
-              </button>
-            </div>
-          </div>
-        </div>
-
-        {/* Quick Actions */}
-        <div className="bg-white rounded-xl shadow-sm border border-gray-200">
-          <div className="p-6 border-b border-gray-200">
-            <h2 className="text-xl font-semibold text-gray-900 flex items-center gap-2">
-              <IslamicIcon type="pattern" size="sm" className="text-gold-500" />
-              إجراءات سريعة
-            </h2>
-          </div>
-          <div className="p-6">
-            <div className="grid grid-cols-2 gap-4">
-              <button className="flex flex-col items-center p-4 border border-gray-200 rounded-lg hover:border-gold-300 hover:bg-gold-50 transition-colors group">
-                <ShoppingBagIcon className="h-8 w-8 text-gray-400 group-hover:text-gold-500 mb-2" />
-                <span className="text-sm font-medium text-gray-700 group-hover:text-gold-700">إضافة منتج</span>
-              </button>
-              <button className="flex flex-col items-center p-4 border border-gray-200 rounded-lg hover:border-olive-300 hover:bg-olive-50 transition-colors group">
-                <UserGroupIcon className="h-8 w-8 text-gray-400 group-hover:text-olive-500 mb-2" />
-                <span className="text-sm font-medium text-gray-700 group-hover:text-olive-700">إدارة العملاء</span>
-              </button>
-              <button className="flex flex-col items-center p-4 border border-gray-200 rounded-lg hover:border-blue-300 hover:bg-blue-50 transition-colors group">
-                <ChartBarIcon className="h-8 w-8 text-gray-400 group-hover:text-blue-500 mb-2" />
-                <span className="text-sm font-medium text-gray-700 group-hover:text-blue-700">عرض التقارير</span>
-              </button>
-              <button className="flex flex-col items-center p-4 border border-gray-200 rounded-lg hover:border-purple-300 hover:bg-purple-50 transition-colors group">
-                <CogIcon className="h-8 w-8 text-gray-400 group-hover:text-purple-500 mb-2" />
-                <span className="text-sm font-medium text-gray-700 group-hover:text-purple-700">الإعدادات</span>
               </button>
             </div>
           </div>

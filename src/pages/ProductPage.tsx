@@ -3,6 +3,8 @@ import { useParams, Link } from 'react-router-dom';
 import { mockProducts } from '../data/mockProducts';
 import { IslamicIcon } from '../components/Icons/IslamicIcon';
 import { useCart } from '../hooks/useCart';
+import { usePageTitle } from '../hooks/usePageTitle';
+import { formatPrice } from '../utils/priceUtils';
 import { StarIcon, ShoppingCartIcon, HeartIcon, ShareIcon, ChevronLeftIcon, ChevronRightIcon } from '@heroicons/react/24/outline';
 import { StarIcon as StarIconSolid } from '@heroicons/react/24/solid';
 import toast from 'react-hot-toast';
@@ -11,6 +13,11 @@ export const ProductPage: React.FC = () => {
   const { id } = useParams();
   const product = mockProducts.find(p => p.id === id);
   const { addItem } = useCart();
+  
+  // تحديث تايتل الصفحة مع اسم المنتج
+  usePageTitle({ 
+    title: product ? product.name : 'منتج غير موجود'
+  });
   
   const [selectedSize, setSelectedSize] = useState<string>('');
   const [selectedColor, setSelectedColor] = useState<string>('');
@@ -200,16 +207,16 @@ export const ProductPage: React.FC = () => {
               {/* Price */}
               <div className="flex items-center gap-4 mb-6">
                 <span className="text-3xl font-bold text-gray-900 font-cairo">
-                  {product.price} ر.س
+                  {formatPrice(product.price)}
                 </span>
                 {hasDiscount && (
                   <span className="text-xl text-gray-500 line-through font-cairo">
-                    {product.originalPrice} ر.س
+                    {formatPrice(product.originalPrice!)}
                   </span>
                 )}
                 {hasDiscount && (
                   <span className="bg-red-100 text-red-800 text-sm px-2 py-1 rounded font-cairo">
-                    وفر {product.originalPrice! - product.price} ر.س
+                    وفر {formatPrice(product.originalPrice! - product.price)}
                   </span>
                 )}
               </div>
@@ -334,7 +341,7 @@ export const ProductPage: React.FC = () => {
               <div className="space-y-4">
                 <div className="flex items-center gap-3">
                   <IslamicIcon type="star" size="sm" className="text-gold-500" />
-                  <span className="text-gray-700 font-cairo">شحن مجاني للطلبات فوق 200 ريال</span>
+                  <span className="text-gray-700 font-cairo">شحن مجاني للطلبات فوق 800 جنيه</span>
                 </div>
                 <div className="flex items-center gap-3">
                   <IslamicIcon type="crescent" size="sm" className="text-olive-500" />

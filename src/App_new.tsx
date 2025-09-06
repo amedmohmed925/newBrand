@@ -18,14 +18,6 @@ import { AboutPage } from './pages/AboutPage';
 import { ContactPage } from './pages/ContactPage';
 import { AccountPage } from './pages/AccountPage';
 import { AdminDashboard } from './pages/Admin/AdminDashboard';
-import { AdminProducts } from './pages/Admin/AdminProducts';
-import { AdminAddProduct } from './pages/Admin/AdminAddProduct';
-import { AdminOrders } from './pages/Admin/AdminOrders';
-import { AdminCustomers } from './pages/Admin/AdminCustomers';
-import { AdminAnalytics } from './pages/Admin/AdminAnalytics';
-import { AdminSettings } from './pages/Admin/AdminSettings';
-import { AdminPromotions } from './pages/Admin/AdminPromotions';
-import { AdminNotifications } from './pages/Admin/AdminNotifications';
 import { Header } from './components/Layout/Header';
 import { Footer } from './components/Layout/Footer';
 import { PageTitle } from './components/Layout/PageTitle';
@@ -187,86 +179,6 @@ const App = () => {
               <ProtectedRoute requireAdmin={true}>
                 <AdminLayout>
                   <AdminDashboard />
-                </AdminLayout>
-              </ProtectedRoute>
-            }
-          />
-          <Route
-            path="/admin/products"
-            element={
-              <ProtectedRoute requireAdmin={true}>
-                <AdminLayout>
-                  <AdminProducts />
-                </AdminLayout>
-              </ProtectedRoute>
-            }
-          />
-          <Route
-            path="/admin/products/add"
-            element={
-              <ProtectedRoute requireAdmin={true}>
-                <AdminLayout>
-                  <AdminAddProduct />
-                </AdminLayout>
-              </ProtectedRoute>
-            }
-          />
-          <Route
-            path="/admin/orders"
-            element={
-              <ProtectedRoute requireAdmin={true}>
-                <AdminLayout>
-                  <AdminOrders />
-                </AdminLayout>
-              </ProtectedRoute>
-            }
-          />
-          <Route
-            path="/admin/customers"
-            element={
-              <ProtectedRoute requireAdmin={true}>
-                <AdminLayout>
-                  <AdminCustomers />
-                </AdminLayout>
-              </ProtectedRoute>
-            }
-          />
-          <Route
-            path="/admin/analytics"
-            element={
-              <ProtectedRoute requireAdmin={true}>
-                <AdminLayout>
-                  <AdminAnalytics />
-                </AdminLayout>
-              </ProtectedRoute>
-            }
-          />
-          <Route
-            path="/admin/settings"
-            element={
-              <ProtectedRoute requireAdmin={true}>
-                <AdminLayout>
-                  <AdminSettings />
-                </AdminLayout>
-              </ProtectedRoute>
-            }
-          />
-          <Route
-            path="/admin/promotions"
-            element={
-              <ProtectedRoute requireAdmin={true}>
-                <AdminLayout>
-                  <AdminPromotions />
-                </AdminLayout>
-              </ProtectedRoute>
-            }
-          />
-          <Route
-            path="/admin/notifications"
-            element={
-              <ProtectedRoute requireAdmin={true}>
-                <AdminLayout>
-                  <AdminNotifications />
                 </AdminLayout>
               </ProtectedRoute>
             }

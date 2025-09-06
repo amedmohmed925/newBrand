@@ -1,11 +1,26 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 import { useCart } from '../hooks/useCart';
+import { usePageTitle } from '../hooks/usePageTitle';
+import { formatPrice } from '../utils/priceUtils';
 import { IslamicIcon } from '../components/Icons/IslamicIcon';
-import { TrashIcon, PlusIcon, MinusIcon, ShoppingBagIcon } from '@heroicons/react/24/outline';
+import { cartUtils } from '../utils/cartUtils';
+import { TrashIcon, PlusIcon, MinusIcon, ShoppingBagIcon, ClockIcon } from '@heroicons/react/24/outline';
 
 export const CartPage: React.FC = () => {
   const { items, updateQuantity, removeItem, total, clearCart } = useCart();
+  const cartSummary = cartUtils.getCartSummary();
+  
+  // تحديث تايتل الصفحة مع عدد العناصر
+  usePageTitle({ 
+    title: items.length > 0 ? `عربة التسوق (${items.length} منتج)` : 'عربة التسوق'
+  });
+  
+  // تحديث تايتل الصفحة مع عدد العناصر
+  const itemCount = items.reduce((sum, item) => sum + item.quantity, 0);
+  usePageTitle({ 
+    title: items.length === 0 ? 'عربة التسوق فارغة' : `عربة التسوق (${itemCount} عنصر)`
+  });
 
   if (items.length === 0) {
     return (
@@ -54,7 +69,7 @@ export const CartPage: React.FC = () => {
         <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
           {/* Cart Items */}
           <div className="lg:col-span-2 space-y-6">
-            {items.map((item, index) => (
+            {items.map((item) => (
               <div key={`${item.product.id}-${item.size}-${item.color}`} className="bg-white p-6 rounded-lg shadow-sm border border-gray-200">
                 <div className="flex gap-6">
                   {/* Product Image */}
@@ -109,10 +124,10 @@ export const CartPage: React.FC = () => {
 
                       <div className="text-left">
                         <p className="text-lg font-bold text-gray-900 font-cairo">
-                          {item.product.price * item.quantity} ر.س
+                          {formatPrice(item.product.price * item.quantity)}
                         </p>
                         <p className="text-sm text-gray-500 font-cairo">
-                          {item.product.price} ر.س × {item.quantity}
+                          {formatPrice(item.product.price)} × {item.quantity}
                         </p>
                       </div>
                     </div>
@@ -149,7 +164,7 @@ export const CartPage: React.FC = () => {
               <div className="space-y-4 mb-6">
                 <div className="flex justify-between">
                   <span className="text-gray-600 font-cairo">المجموع الفرعي</span>
-                  <span className="font-cairo">{total} ر.س</span>
+                  <span className="font-cairo">{formatPrice(total)}</span>
                 </div>
                 <div className="flex justify-between">
                   <span className="text-gray-600 font-cairo">الشحن</span>
@@ -158,7 +173,7 @@ export const CartPage: React.FC = () => {
                 <div className="border-t border-gray-200 pt-4">
                   <div className="flex justify-between text-lg font-bold">
                     <span className="text-gray-900 font-cairo">المجموع الكلي</span>
-                    <span className="text-gray-900 font-cairo">{total} ر.س</span>
+                    <span className="text-gray-900 font-cairo">{formatPrice(total)}</span>
                   </div>
                 </div>
               </div>
@@ -170,8 +185,16 @@ export const CartPage: React.FC = () => {
                   <span className="text-sm font-semibold text-gold-800 font-cairo">شحن مجاني</span>
                 </div>
                 <p className="text-sm text-gold-700 font-cairo">
-                  للطلبات فوق 200 ريال سعودي
+                  للطلبات فوق 800 جنيه مصري
                 </p>
+                {cartSummary.lastUpdated && (
+                  <div className="flex items-center gap-1 mt-2 text-xs text-gold-600">
+                    <ClockIcon className="h-3 w-3" />
+                    <span className="font-cairo">
+                      آخر تحديث: {new Date(cartSummary.lastUpdated).toLocaleString('ar-SA')}
+                    </span>
+                  </div>
+                )}
               </div>
 
               <Link

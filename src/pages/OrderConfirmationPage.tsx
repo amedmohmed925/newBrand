@@ -1,11 +1,18 @@
 import React from 'react';
 import { useLocation, Link } from 'react-router-dom';
 import { IslamicIcon } from '../components/Icons/IslamicIcon';
+import { usePageTitle } from '../hooks/usePageTitle';
+import { formatPrice } from '../utils/priceUtils';
 import { CheckCircleIcon, PrinterIcon, ShareIcon } from '@heroicons/react/24/outline';
 
 export const OrderConfirmationPage: React.FC = () => {
   const location = useLocation();
   const { orderId, customerData, items, total } = location.state || {};
+  
+  // تحديث تايتل الصفحة مع رقم الطلب
+  usePageTitle({ 
+    title: orderId ? `تأكيد الطلب #${orderId}` : 'تأكيد الطلب'
+  });
 
   if (!orderId) {
     return (
@@ -22,7 +29,7 @@ export const OrderConfirmationPage: React.FC = () => {
     <div className="min-h-screen bg-gray-50">
       {/* Success Header with Islamic Pattern */}
       <div className="relative bg-gradient-to-l from-green-50 to-white border-b border-gray-200">
-        <div className="absolute inset-0 opacity-5">
+        <div className="absolute inset-0 opacity-5 -z-10">
           <IslamicIcon type="pattern" className="w-full h-full text-green-500" />
         </div>
         <div className="relative max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 py-16 text-center">
@@ -113,7 +120,7 @@ export const OrderConfirmationPage: React.FC = () => {
                         الكمية: {item.quantity}
                       </span>
                       <span className="font-bold text-gray-900 font-cairo">
-                        {item.product.price * item.quantity} ر.س
+                        {formatPrice(item.product.price * item.quantity)}
                       </span>
                     </div>
                   </div>
@@ -125,7 +132,7 @@ export const OrderConfirmationPage: React.FC = () => {
             <div className="border-t border-gray-200 pt-4">
               <div className="flex justify-between text-xl font-bold text-gray-900 font-cairo">
                 <span>المجموع الكلي</span>
-                <span>{total} ر.س</span>
+                <span>{formatPrice(total)}</span>
               </div>
             </div>
           </div>
@@ -176,8 +183,8 @@ export const OrderConfirmationPage: React.FC = () => {
                 تواصل معنا عبر واتساب أو البريد الإلكتروني
               </p>
               <div className="flex items-center gap-4 text-sm">
-                <a href="https://wa.me/966501234567" className="text-green-600 hover:text-green-700 font-cairo">
-                  واتساب: 966501234567+
+                <a href="https://wa.me/201012345678" className="text-green-600 hover:text-green-700 font-cairo">
+                  واتساب: +20 10 1234 5678
                 </a>
                 <a href="mailto:support@rawnaq.com" className="text-gold-600 hover:text-gold-700 font-cairo">
                   support@rawnaq.com

@@ -2,6 +2,7 @@ import React from 'react';
 import { Product } from '../../types';
 import { IslamicIcon } from '../Icons/IslamicIcon';
 import { Link } from 'react-router-dom';
+import { formatPrice } from '../../utils/priceUtils';
 
 interface ProductCardProps {
   product: Product;
@@ -65,11 +66,11 @@ export const ProductCard: React.FC<ProductCardProps> = ({ product }) => {
           <div className="flex items-center justify-between">
             <div className="flex items-center gap-2">
               <span className="font-bold text-lg text-gray-900 font-cairo">
-                {product.price} ر.س
+                {formatPrice(product.price)}
               </span>
               {hasDiscount && (
                 <span className="text-sm text-gray-500 line-through font-cairo">
-                  {product.originalPrice} ر.س
+                  {formatPrice(product.originalPrice!)}
                 </span>
               )}
             </div>

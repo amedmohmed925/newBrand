@@ -4,9 +4,9 @@ import { Link } from 'react-router-dom';
 
 export const Footer: React.FC = () => {
   return (
-    <footer className="bg-gray-50 border-t border-gray-200">
+    <footer className="bg-gray-50 border-t border-gray-200 relative">
       {/* Islamic Pattern Background */}
-      <div className="absolute inset-0 opacity-5">
+      <div className="absolute inset-0 opacity-5 -z-10">
         <IslamicIcon type="pattern" className="w-full h-full text-gold-500" />
       </div>
       
@@ -60,7 +60,7 @@ export const Footer: React.FC = () => {
               <div>
                 <h3 className="text-base font-semibold text-gray-900 font-cairo">تواصل معنا</h3>
                 <div className="mt-4 space-y-3">
-                  <p className="text-gray-600 font-cairo">واتساب: 966501234567+</p>
+                  <p className="text-gray-600 font-cairo">واتساب: +20 10 1234 5678</p>
                   <p className="text-gray-600 font-cairo">البريد: info@rawnaq.com</p>
                   <div className="flex items-center space-x-reverse space-x-2 mt-4">
                     <span className="text-sm text-gray-500 font-cairo">اتبعنا على:</span>

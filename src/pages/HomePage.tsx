@@ -12,7 +12,7 @@ export const HomePage: React.FC = () => {
     <div className="min-h-screen bg-white">
       {/* Hero Section */}
       <section className="relative bg-gradient-to-l from-gold-50 to-white">
-        <div className="absolute inset-0 opacity-5">
+        <div className="absolute inset-0 opacity-5 -z-10">
           <IslamicIcon type="pattern" className="w-full h-full text-gold-500" />
         </div>
         
@@ -189,7 +189,7 @@ export const HomePage: React.FC = () => {
             {[
               {
                 name: 'سارة أحمد',
-                location: 'الرياض',
+                location: 'القاهرة',
                 text: 'قطع رائعة تجمع بين الأصالة والحداثة. جودة الخامات ممتازة والتطريز فني جداً.'
               },
               {

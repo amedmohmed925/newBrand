@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
-import { Link, Outlet, useLocation } from 'react-router-dom';
+import { Link, useLocation } from 'react-router-dom';
 import { IslamicIcon } from '../Icons/IslamicIcon';
+import { PageTitle } from '../Layout/PageTitle';
 import { 
   HomeIcon, 
   ShoppingBagIcon, 
@@ -14,7 +15,7 @@ import {
   GiftIcon
 } from '@heroicons/react/24/outline';
 
-const AdminLayout: React.FC = () => {
+const AdminLayout: React.FC<{ children: React.ReactNode }> = ({ children }) => {
   const [sidebarOpen, setSidebarOpen] = useState(false);
   const location = useLocation();
 
@@ -30,6 +31,7 @@ const AdminLayout: React.FC = () => {
 
   return (
     <div className="min-h-screen bg-gray-50 font-cairo">
+      <PageTitle customTitle="لوحة التحكم" brandName="رونق - لوحة الإدارة" />
       {/* Mobile sidebar backdrop */}
       {sidebarOpen && (
         <div 
@@ -41,7 +43,7 @@ const AdminLayout: React.FC = () => {
       {/* Sidebar */}
       <div className={`fixed inset-y-0 right-0 z-50 w-64 bg-white shadow-xl transform ${
         sidebarOpen ? 'translate-x-0' : 'translate-x-full'
-      } transition-transform lg:translate-x-0 lg:static lg:inset-0`}>
+      } transition-transform lg:translate-x-0 flex flex-col h-screen`}>
         
         {/* Logo */}
         <div className="flex items-center justify-between h-16 px-6 border-b border-gray-200">
@@ -58,7 +60,7 @@ const AdminLayout: React.FC = () => {
         </div>
 
         {/* Navigation */}
-        <nav className="mt-6 px-4">
+        <nav className="mt-6 px-4 flex-1">
           <div className="space-y-2">
             {navigation.map((item) => {
               const isActive = location.pathname === item.href || 
@@ -84,7 +86,7 @@ const AdminLayout: React.FC = () => {
         </nav>
 
         {/* User Menu */}
-        <div className="absolute bottom-0 left-0 right-0 p-4 border-t border-gray-200">
+        <div className="p-4 border-t border-gray-200">
           <div className="flex items-center gap-3 mb-3">
             <div className="w-8 h-8 bg-gold-100 rounded-full flex items-center justify-center">
               <IslamicIcon type="star" size="sm" className="text-gold-600" />
@@ -102,7 +104,7 @@ const AdminLayout: React.FC = () => {
       </div>
 
       {/* Main content */}
-      <div className="lg:pr-64">
+      <div className="lg:pr-64 min-h-screen">
         {/* Top bar */}
         <div className="bg-white shadow-sm border-b border-gray-200">
           <div className="flex items-center justify-between h-16 px-6">
@@ -134,7 +136,7 @@ const AdminLayout: React.FC = () => {
 
         {/* Page content */}
         <main className="p-6">
-          <Outlet />
+          {children}
         </main>
       </div>
     </div>
