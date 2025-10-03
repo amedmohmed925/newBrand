@@ -12,6 +12,7 @@ export const Header: React.FC = () => {
   const navigation = [
     { name: 'الرئيسية', href: '/' },
     { name: 'المتجر', href: '/shop' },
+    { name: 'الفئات', href: '/categories' },
     { name: 'المجموعات', href: '/collections' },
     { name: 'عن رونق', href: '/about' },
     { name: 'تواصل معنا', href: '/contact' },

@@ -3,6 +3,7 @@ import { Link } from 'react-router-dom';
 import { IslamicIcon } from '../components/Icons/IslamicIcon';
 import { ProductCard } from '../components/Product/ProductCard';
 import { mockProducts } from '../data/mockProducts';
+import { categories } from '../data/categories';
 import { ChevronLeftIcon } from '@heroicons/react/24/outline';
 
 export const HomePage: React.FC = () => {
@@ -107,6 +108,53 @@ export const HomePage: React.FC = () => {
               className="inline-flex items-center border-2 border-gold-500 text-gold-500 px-8 py-3 rounded-lg font-semibold font-cairo hover:bg-gold-500 hover:text-white transition-all duration-300 group"
             >
               عرض جميع المنتجات
+              <ChevronLeftIcon className="mr-2 h-5 w-5 group-hover:transform group-hover:-translate-x-1 transition-transform" />
+            </Link>
+          </div>
+        </div>
+      </section>
+
+      {/* Categories Section */}
+      <section className="py-16 bg-gradient-to-br from-gray-50 to-white">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          <div className="text-center mb-12">
+            <div className="flex items-center justify-center gap-3 mb-4">
+              <IslamicIcon type="pattern" className="text-olive-500" />
+              <h2 className="text-3xl font-bold text-gray-900 font-cairo">تصفح الفئات</h2>
+              <IslamicIcon type="pattern" className="text-olive-500" />
+            </div>
+            <p className="text-gray-600 font-cairo">استكشف مجموعتنا المتنوعة من الملابس الرجالية</p>
+          </div>
+
+          <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4 md:gap-6">
+            {categories.slice(0, 8).map((category) => (
+              <Link
+                key={category.id}
+                to={`/shop?category=${category.id}`}
+                className="group bg-white rounded-xl shadow-md hover:shadow-xl transition-all duration-300 overflow-hidden"
+              >
+                <div className="p-6 text-center">
+                  <div className="text-5xl mb-3 group-hover:scale-110 transition-transform">
+                    {category.icon}
+                  </div>
+                  <h3 className="text-lg font-bold text-gray-900 font-cairo mb-1 group-hover:text-gold-600 transition-colors">
+                    {category.name}
+                  </h3>
+                  <p className="text-sm text-gray-500 font-cairo">
+                    {category.subcategories?.length || 0} قسم
+                  </p>
+                </div>
+                <div className="bg-gradient-to-l from-gold-500 to-olive-500 h-1 transform scale-x-0 group-hover:scale-x-100 transition-transform origin-right"></div>
+              </Link>
+            ))}
+          </div>
+
+          <div className="text-center mt-12">
+            <Link 
+              to="/categories"
+              className="inline-flex items-center border-2 border-olive-500 text-olive-500 px-8 py-3 rounded-lg font-semibold font-cairo hover:bg-olive-500 hover:text-white transition-all duration-300 group"
+            >
+              عرض جميع الفئات
               <ChevronLeftIcon className="mr-2 h-5 w-5 group-hover:transform group-hover:-translate-x-1 transition-transform" />
             </Link>
           </div>

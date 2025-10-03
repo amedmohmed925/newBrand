@@ -1,25 +1,32 @@
 import React, { useState, useMemo } from 'react';
 import { ProductCard } from '../components/Product/ProductCard';
 import { mockProducts } from '../data/mockProducts';
+import { categories } from '../data/categories';
 import { IslamicIcon } from '../components/Icons/IslamicIcon';
 import { FunnelIcon, Squares2X2Icon, Bars3Icon } from '@heroicons/react/24/outline';
 
 export const ShopPage: React.FC = () => {
   const [selectedCategory, setSelectedCategory] = useState<string>('all');
+  const [selectedSubcategory, setSelectedSubcategory] = useState<string>('all');
   const [sortBy, setSortBy] = useState<string>('popularity');
   const [showFilters, setShowFilters] = useState(false);
   const [viewMode, setViewMode] = useState<'grid' | 'list'>('grid');
 
-  const categories = useMemo(() => {
-    const cats = ['all', ...Array.from(new Set(mockProducts.map(p => p.category)))];
-    return cats;
-  }, []);
+  const selectedCategoryData = useMemo(() => {
+    if (selectedCategory === 'all') return null;
+    return categories.find(cat => cat.id === selectedCategory);
+  }, [selectedCategory]);
 
   const filteredProducts = useMemo(() => {
     let products = mockProducts;
     
     if (selectedCategory !== 'all') {
       products = products.filter(product => product.category === selectedCategory);
+    }
+
+    if (selectedSubcategory !== 'all') {
+      // فلترة حسب القسم الفرعي من خلال التاجز
+      products = products.filter(product => product.tags.includes(selectedSubcategory));
     }
 
     // Sort products
@@ -38,7 +45,7 @@ export const ShopPage: React.FC = () => {
     }
 
     return products;
-  }, [selectedCategory, sortBy]);
+  }, [selectedCategory, selectedSubcategory, sortBy]);
 
   return (
     <div className="min-h-screen bg-gray-50">
@@ -68,18 +75,68 @@ export const ShopPage: React.FC = () => {
                   الفئات
                 </h3>
                 <div className="space-y-2">
+                  {/* All Products */}
+                  <button
+                    onClick={() => {
+                      setSelectedCategory('all');
+                      setSelectedSubcategory('all');
+                    }}
+                    className={`block w-full text-right px-3 py-2 rounded font-cairo transition-colors ${
+                      selectedCategory === 'all'
+                        ? 'bg-gold-100 text-gold-700 border-gold-200 font-semibold'
+                        : 'text-gray-600 hover:text-gray-900 hover:bg-gray-50'
+                    }`}
+                  >
+                    جميع المنتجات
+                  </button>
+
+                  {/* Categories */}
                   {categories.map((category) => (
-                    <button
-                      key={category}
-                      onClick={() => setSelectedCategory(category)}
-                      className={`block w-full text-right px-3 py-2 rounded font-cairo transition-colors ${
-                        selectedCategory === category
-                          ? 'bg-gold-100 text-gold-700 border-gold-200'
-                          : 'text-gray-600 hover:text-gray-900 hover:bg-gray-50'
-                      }`}
-                    >
-                      {category === 'all' ? 'جميع المنتجات' : category}
-                    </button>
+                    <div key={category.id}>
+                      <button
+                        onClick={() => {
+                          setSelectedCategory(category.id);
+                          setSelectedSubcategory('all');
+                        }}
+                        className={`block w-full text-right px-3 py-2 rounded font-cairo transition-colors ${
+                          selectedCategory === category.id
+                            ? 'bg-gold-100 text-gold-700 border-gold-200 font-semibold'
+                            : 'text-gray-600 hover:text-gray-900 hover:bg-gray-50'
+                        }`}
+                      >
+                        <span className="ml-2">{category.icon}</span>
+                        {category.name}
+                      </button>
+
+                      {/* Subcategories */}
+                      {selectedCategory === category.id && category.subcategories && (
+                        <div className="mr-4 mt-2 space-y-1">
+                          <button
+                            onClick={() => setSelectedSubcategory('all')}
+                            className={`block w-full text-right px-3 py-1.5 rounded text-sm font-cairo transition-colors ${
+                              selectedSubcategory === 'all'
+                                ? 'bg-olive-50 text-olive-700 font-medium'
+                                : 'text-gray-500 hover:text-gray-700 hover:bg-gray-50'
+                            }`}
+                          >
+                            الكل
+                          </button>
+                          {category.subcategories.map((subcategory) => (
+                            <button
+                              key={subcategory.id}
+                              onClick={() => setSelectedSubcategory(subcategory.id)}
+                              className={`block w-full text-right px-3 py-1.5 rounded text-sm font-cairo transition-colors ${
+                                selectedSubcategory === subcategory.id
+                                  ? 'bg-olive-50 text-olive-700 font-medium'
+                                  : 'text-gray-500 hover:text-gray-700 hover:bg-gray-50'
+                              }`}
+                            >
+                              {subcategory.name}
+                            </button>
+                          ))}
+                        </div>
+                      )}
+                    </div>
                   ))}
                 </div>
               </div>
@@ -120,7 +177,10 @@ export const ShopPage: React.FC = () => {
                   
                   <p className="text-gray-600 font-cairo">
                     {filteredProducts.length} منتج
-                    {selectedCategory !== 'all' && ` في ${selectedCategory}`}
+                    {selectedCategory !== 'all' && selectedCategoryData && ` في ${selectedCategoryData.name}`}
+                    {selectedSubcategory !== 'all' && selectedCategoryData && 
+                      ` - ${selectedCategoryData.subcategories?.find(s => s.id === selectedSubcategory)?.name}`
+                    }
                   </p>
                 </div>
 

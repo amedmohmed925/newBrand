@@ -14,6 +14,7 @@ import { AuthPage } from './pages/AuthPage';
 import { LoginPage } from './pages/LoginPage';
 import { RegisterPage } from './pages/RegisterPage';
 import { CollectionsPage } from './pages/CollectionsPage';
+import { CategoriesPage } from './pages/CategoriesPage';
 import { AboutPage } from './pages/AboutPage';
 import { ContactPage } from './pages/ContactPage';
 import { AccountPage } from './pages/AccountPage';
@@ -119,6 +120,17 @@ const App = () => {
                 <PageTitle />
                 <Header />
                 <CollectionsPage />
+                <Footer />
+              </>
+            }
+          />
+          <Route
+            path="/categories"
+            element={
+              <>
+                <PageTitle />
+                <Header />
+                <CategoriesPage />
                 <Footer />
               </>
             }
